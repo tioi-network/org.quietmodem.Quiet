@@ -1,34 +1,36 @@
 package org.quietmodem.Quiet;
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.MediumTest;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.MediumTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.SocketException;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
 public class SocketTest {
     private static LoopbackNetworkInterface intf;
+
     @BeforeClass
     public static void setup() {
         FrameReceiverConfig receiverConfig = null;
         FrameTransmitterConfig transmitterConfig = null;
 
         try {
-            transmitterConfig = new FrameTransmitterConfig(InstrumentationRegistry.getTargetContext(), "audible-7k-channel-0");
-            receiverConfig = new FrameReceiverConfig(InstrumentationRegistry.getTargetContext(), "audible-7k-channel-0");
+            transmitterConfig = new FrameTransmitterConfig(InstrumentationRegistry.getInstrumentation().getTargetContext(), "audible-7k-channel-0");
+            receiverConfig = new FrameReceiverConfig(InstrumentationRegistry.getInstrumentation().getTargetContext(), "audible-7k-channel-0");
         } catch (IOException e) {
             fail("could not build configs");
 

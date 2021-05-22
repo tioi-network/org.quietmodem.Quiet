@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 public class InetAddress {
     private static native String byte2str(byte[] addr) throws UnknownHostException;
+
     private static native byte[] str2byte(String addr) throws UnknownHostException;
 
     private byte[] address;
@@ -35,7 +36,7 @@ public class InetAddress {
         if (!(obj instanceof InetAddress)) {
             return false;
         }
-        InetAddress i = (InetAddress)obj;
+        InetAddress i = (InetAddress) obj;
         byte[] otherAddr = i.getAddress();
         if (otherAddr.length != this.address.length) {
             return false;

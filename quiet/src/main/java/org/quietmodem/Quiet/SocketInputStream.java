@@ -5,7 +5,9 @@ import java.io.InputStream;
 
 public class SocketInputStream extends InputStream {
     private native int nativeAvailable() throws IOException;
+
     private native void nativeClose() throws IOException;
+
     private native int nativeRead(byte[] buf, long off, long len) throws IOException;
 
     private int fd;
@@ -33,7 +35,7 @@ public class SocketInputStream extends InputStream {
     public int read() throws IOException {
         byte buf[] = new byte[1];
         nativeRead(buf, 0, 1);
-        return (int)buf[0];
+        return (int) buf[0];
     }
 
     @Override

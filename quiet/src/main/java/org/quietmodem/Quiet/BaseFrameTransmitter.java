@@ -4,18 +4,26 @@ import java.io.IOException;
 
 public abstract class BaseFrameTransmitter {
     private native long nativeOpen(long sys_ptr, FrameTransmitterConfig conf, boolean is_loopback) throws ModemException;
+
     private native void nativeClose();
+
     private native void nativeTerminate(int urgency);
+
     private native long nativeSend(byte[] frame, long offset, long length) throws IOException;
+
     private native void nativeSetBlocking(long sec, long nano);
+
     private native void nativeSetNonblocking();
+
     private native long nativeGetFrameLength();
+
     private native void nativeFree();
 
     protected QuietSystem quietSystem;
     private long enc_ptr;
 
     protected abstract void initSystem() throws ModemException;
+
     protected abstract boolean isLoopback();
 
     public BaseFrameTransmitter(FrameTransmitterConfig conf) throws ModemException {

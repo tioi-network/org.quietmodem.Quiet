@@ -1,11 +1,10 @@
 package org.quietmodem.Quiet;
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.MediumTest;
 import android.util.Log;
 
-import static org.junit.Assert.*;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.MediumTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +12,9 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
@@ -28,10 +30,10 @@ public class FrameStatsTest {
              * with `this`
              */
             transmitterConfig = new FrameTransmitterConfig(
-                    InstrumentationRegistry.getTargetContext(),
+                    InstrumentationRegistry.getInstrumentation().getTargetContext(),
                     "audible-7k-channel-0");
             receiverConfig = new FrameReceiverConfig(
-                    InstrumentationRegistry.getTargetContext(),
+                    InstrumentationRegistry.getInstrumentation().getTargetContext(),
                     "audible-7k-channel-0");
         } catch (IOException e) {
             fail("could not build configs");

@@ -4,22 +4,34 @@ import java.io.IOException;
 
 public abstract class BaseFrameReceiver {
     private native long nativeOpen(long sys_ptr, FrameReceiverConfig conf, boolean is_loopback) throws ModemException;
+
     private native void nativeClose();
+
     private native void nativeTerminate(int urgency);
+
     private native long nativeRecv(byte[] frame, long offset, long length) throws IOException;
+
     private native void nativeSetBlocking(long seconds, long nano);
+
     private native void nativeSetNonblocking();
+
     private native void nativeFree();
+
     private native void nativeEnableStats();
+
     private native void nativeDisableStats();
+
     private native void nativeStatsSetBlocking(long seconds, long nano);
+
     private native void nativeStatsSetNonblocking();
+
     private native FrameStats nativeRecvStats() throws IOException;
 
     protected QuietSystem quietSystem;
     private long dec_ptr;
 
     protected abstract void initSystem() throws ModemException;
+
     protected abstract boolean isLoopback();
 
     public BaseFrameReceiver(FrameReceiverConfig conf) throws ModemException {
@@ -56,11 +68,25 @@ public abstract class BaseFrameReceiver {
         this.nativeTerminate(urgency);
     }
 
-    public void enableStats() { nativeEnableStats(); }
-    public void disableStats() { nativeDisableStats(); }
-    public void statsSetBlocking(long seconds, long nano) { nativeStatsSetBlocking(seconds, nano); }
-    public void statsSetNonblocking() { nativeStatsSetNonblocking(); }
-    public synchronized FrameStats receiveStats() throws IOException { return nativeRecvStats(); }
+    public void enableStats() {
+        nativeEnableStats();
+    }
+
+    public void disableStats() {
+        nativeDisableStats();
+    }
+
+    public void statsSetBlocking(long seconds, long nano) {
+        nativeStatsSetBlocking(seconds, nano);
+    }
+
+    public void statsSetNonblocking() {
+        nativeStatsSetNonblocking();
+    }
+
+    public synchronized FrameStats receiveStats() throws IOException {
+        return nativeRecvStats();
+    }
 
     @Override
     protected void finalize() {

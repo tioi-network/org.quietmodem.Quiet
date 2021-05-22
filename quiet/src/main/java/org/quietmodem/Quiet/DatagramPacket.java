@@ -35,18 +35,18 @@ public class DatagramPacket {
         this.addr = new InetSocketAddress(address, port);
     }
 
-    public DatagramPacket(byte[]buf, int offset, int length, SocketAddress address) {
+    public DatagramPacket(byte[] buf, int offset, int length, SocketAddress address) {
         this.buf = buf;
         this.offset = offset;
         this.length = length;
-        this.addr = (InetSocketAddress)address;
+        this.addr = (InetSocketAddress) address;
     }
 
     public DatagramPacket(byte[] buf, int length, SocketAddress address) {
         this.buf = buf;
         this.length = length;
         this.offset = 0;
-        this.addr = (InetSocketAddress)address;
+        this.addr = (InetSocketAddress) address;
     }
 
     public InetAddress getAddress() {
@@ -100,7 +100,7 @@ public class DatagramPacket {
     }
 
     public void setSocketAddress(SocketAddress address) {
-        this.addr = (InetSocketAddress)address;
+        this.addr = (InetSocketAddress) address;
     }
 
     private void setSocketAddress(byte addr[], int port) {

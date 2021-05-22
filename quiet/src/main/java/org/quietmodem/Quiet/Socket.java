@@ -10,26 +10,47 @@ import java.util.Enumeration;
 
 public class Socket {
     private native int nativeCreate() throws SocketException;
+
     private native void nativeBind(InetSocketAddress inetSocketAddress) throws IOException;
+
     private native void nativeClose() throws IOException;
+
     private native void nativeConnect(InetSocketAddress inetSocketAddress) throws IOException;
+
     private native InetSocketAddress nativeGetLocal() throws IOException;
+
     private native InetSocketAddress nativeGetRemote() throws IOException;
+
     private native boolean nativeGetKeepAlive() throws SocketException;
+
     private native boolean nativeGetOOBInline() throws SocketException;
+
     private native int nativeGetReceiveBufferSize() throws SocketException;
+
     private native boolean nativeGetReuseAddress() throws SocketException;
+
     private native int nativeGetSendBufferSize() throws SocketException;
+
     private native int nativeGetSoLinger() throws SocketException;
+
     private native int nativeGetSoTimeout() throws SocketException;
+
     private native boolean nativeGetTcpNoDelay() throws SocketException;
+
     private native void nativeSetKeepAlive(boolean keepalive) throws SocketException;
+
     private native void nativeSetOOBInline(boolean oobinline) throws SocketException;
+
     private native void nativeSetReceiveBufferSize(int size) throws SocketException;
+
     private native void nativeSetReuseAddress(boolean reuse) throws SocketException;
+
     private native void nativeSendBufferSize(int size) throws SocketException;
+
     private native void nativeSetSoLinger(int linger) throws SocketException;
+
     private native void nativeSetSoTimeout(int timeout) throws SocketException;
+
     private native void nativeSetTcpNoDelay(boolean nodelay) throws SocketException;
 
     private int fd;
@@ -204,37 +225,69 @@ public class Socket {
         return addr.getPort();
     }
 
-    public boolean getKeepAlive() throws SocketException { return nativeGetKeepAlive(); }
+    public boolean getKeepAlive() throws SocketException {
+        return nativeGetKeepAlive();
+    }
 
-    public boolean getOOBInline() throws SocketException { return nativeGetOOBInline(); }
+    public boolean getOOBInline() throws SocketException {
+        return nativeGetOOBInline();
+    }
 
-    public int getReceiveBufferSize() throws SocketException { return nativeGetReceiveBufferSize(); }
+    public int getReceiveBufferSize() throws SocketException {
+        return nativeGetReceiveBufferSize();
+    }
 
-    public boolean getReuseAddress() throws SocketException { return nativeGetReuseAddress(); }
+    public boolean getReuseAddress() throws SocketException {
+        return nativeGetReuseAddress();
+    }
 
-    public int getSendBufferSize() throws SocketException { return nativeGetSendBufferSize(); }
+    public int getSendBufferSize() throws SocketException {
+        return nativeGetSendBufferSize();
+    }
 
-    public int getSoLinger() throws SocketException { return nativeGetSoLinger(); }
+    public int getSoLinger() throws SocketException {
+        return nativeGetSoLinger();
+    }
 
-    public int getSoTimeout() throws SocketException { return nativeGetSoTimeout(); }
+    public int getSoTimeout() throws SocketException {
+        return nativeGetSoTimeout();
+    }
 
-    public boolean getTcpNoDelay() throws SocketException { return nativeGetTcpNoDelay(); }
+    public boolean getTcpNoDelay() throws SocketException {
+        return nativeGetTcpNoDelay();
+    }
 
-    public void setKeepAlive(boolean keepAlive) throws SocketException { nativeSetKeepAlive(keepAlive); }
+    public void setKeepAlive(boolean keepAlive) throws SocketException {
+        nativeSetKeepAlive(keepAlive);
+    }
 
-    public void setOOBInline(boolean oobInline) throws SocketException { nativeSetOOBInline(oobInline); }
+    public void setOOBInline(boolean oobInline) throws SocketException {
+        nativeSetOOBInline(oobInline);
+    }
 
-    public void setReceiveBufferSize(int size) throws SocketException { nativeSetReceiveBufferSize(size); }
+    public void setReceiveBufferSize(int size) throws SocketException {
+        nativeSetReceiveBufferSize(size);
+    }
 
-    public void setReuseAddress(boolean reuse) throws SocketException { nativeSetReuseAddress(reuse); }
+    public void setReuseAddress(boolean reuse) throws SocketException {
+        nativeSetReuseAddress(reuse);
+    }
 
-    public void setSendBufferSize(int size) throws SocketException { nativeSetReceiveBufferSize(size); }
+    public void setSendBufferSize(int size) throws SocketException {
+        nativeSetReceiveBufferSize(size);
+    }
 
-    public void setSoLinger(int linger) throws SocketException { nativeSetSoLinger(linger); }
+    public void setSoLinger(int linger) throws SocketException {
+        nativeSetSoLinger(linger);
+    }
 
-    public void setSoTimeout(int timeout) throws SocketException { nativeSetSoTimeout(timeout); }
+    public void setSoTimeout(int timeout) throws SocketException {
+        nativeSetSoTimeout(timeout);
+    }
 
-    public void SetTcpNoDelay(boolean nodelay) throws SocketException { nativeSetTcpNoDelay(nodelay); }
+    public void SetTcpNoDelay(boolean nodelay) throws SocketException {
+        nativeSetTcpNoDelay(nodelay);
+    }
 
     static {
         QuietInit.init();

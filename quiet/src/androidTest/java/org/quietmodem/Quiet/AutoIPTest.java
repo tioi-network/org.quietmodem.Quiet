@@ -1,32 +1,36 @@
 package org.quietmodem.Quiet;
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.LargeTest;
-import android.util.Log;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
 import java.io.IOException;
 import java.net.SocketException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class AutoIPTest {
     private static LoopbackNetworkInterface intf;
+
     @BeforeClass
     public static void setup() {
         FrameReceiverConfig receiverConfig = null;
         FrameTransmitterConfig transmitterConfig = null;
 
         try {
-            transmitterConfig = new FrameTransmitterConfig(InstrumentationRegistry.getTargetContext(),
+            transmitterConfig = new FrameTransmitterConfig(InstrumentationRegistry.getInstrumentation().getTargetContext(),
                     "audible-7k-channel-0");
-            receiverConfig = new FrameReceiverConfig(InstrumentationRegistry.getTargetContext(),
+            receiverConfig = new FrameReceiverConfig(InstrumentationRegistry.getInstrumentation().getTargetContext(),
                     "audible-7k-channel-0");
         } catch (IOException e) {
             fail("could not build configs");
@@ -34,8 +38,8 @@ public class AutoIPTest {
         }
 
         NetworkInterfaceConfig conf = new NetworkInterfaceConfig(
-                    receiverConfig,
-                    transmitterConfig);
+                receiverConfig,
+                transmitterConfig);
 
         try {
             intf = new LoopbackNetworkInterface(conf);

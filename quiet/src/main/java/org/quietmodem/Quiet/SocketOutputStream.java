@@ -5,6 +5,7 @@ import java.io.OutputStream;
 
 public class SocketOutputStream extends OutputStream {
     private native void nativeClose() throws IOException;
+
     private native void nativeWrite(byte[] buf, long off, long len) throws IOException;
 
     private int fd;
@@ -35,7 +36,7 @@ public class SocketOutputStream extends OutputStream {
 
     @Override
     public void write(int b) throws IOException {
-        byte buf[] = new byte[]{(byte)b};
+        byte buf[] = new byte[]{(byte) b};
         nativeWrite(buf, 0, 1);
     }
 

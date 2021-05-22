@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class NetworkInterfaceConfig {
     FrameReceiverConfig receiverConfig;
-    FrameTransmitterConfig transmitterConfig;;
+    FrameTransmitterConfig transmitterConfig;
+    ;
     InetAddress localAddress;
     InetAddress netmask;
     InetAddress gateway;
@@ -58,21 +59,37 @@ public class NetworkInterfaceConfig {
         this.hardwareAddress = hardwareAddress;
     }
 
-    public FrameReceiverConfig getReceiverConfig() { return receiverConfig; }
+    public FrameReceiverConfig getReceiverConfig() {
+        return receiverConfig;
+    }
 
-    public FrameTransmitterConfig getTransmitterConfig() { return transmitterConfig; }
+    public FrameTransmitterConfig getTransmitterConfig() {
+        return transmitterConfig;
+    }
 
-    public InetAddress getLocalAddress() { return localAddress; }
+    public InetAddress getLocalAddress() {
+        return localAddress;
+    }
 
-    public InetAddress getNetmask() { return netmask; }
+    public InetAddress getNetmask() {
+        return netmask;
+    }
 
-    public InetAddress getGateway() { return gateway; }
+    public InetAddress getGateway() {
+        return gateway;
+    }
 
-    public byte[] getHardwareAddress() { return hardwareAddress; }
+    public byte[] getHardwareAddress() {
+        return hardwareAddress;
+    }
 
-    public void setReceiverConfig(FrameReceiverConfig conf) { this.receiverConfig = conf; }
+    public void setReceiverConfig(FrameReceiverConfig conf) {
+        this.receiverConfig = conf;
+    }
 
-    public void setTransmitterConfig(FrameTransmitterConfig conf) { this.transmitterConfig = conf; }
+    public void setTransmitterConfig(FrameTransmitterConfig conf) {
+        this.transmitterConfig = conf;
+    }
 
     public void setLocalAddress(InetAddress localAddress) {
         this.localAddress = localAddress;
@@ -94,6 +111,7 @@ public class NetworkInterfaceConfig {
     }
 
     private static final Random rand = new Random();
+
     public static byte[] getRandomHardwareAddress() {
         byte[] mac = new byte[6];
         // we choose an address with a locally administered address
@@ -101,7 +119,7 @@ public class NetworkInterfaceConfig {
         // don't really need to use the entire range
         mac[0] = 2;
         // the top nibble of this address can still be random
-        mac[0] |= (byte)((rand.nextInt(16)) << 4);
+        mac[0] |= (byte) ((rand.nextInt(16)) << 4);
         for (int i = 1; i < 6; i++) {
             mac[i] = (byte) rand.nextInt(256);
         }

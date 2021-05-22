@@ -8,15 +8,25 @@ public class ServerSocket {
     private int fd;
 
     private native int nativeCreate();
+
     private native void nativeBind(InetSocketAddress inetSocketAddress, int backlog) throws IOException;
+
     private native void nativeClose();
+
     private native int nativeAccept() throws IOException;
+
     private native InetSocketAddress nativeGetLocal() throws IOException;
+
     private native int nativeGetReceiveBufferSize();
+
     private native boolean nativeGetReuseAddress();
+
     private native int nativeGetSoTimeout();
+
     private native void nativeSetReceiveBufferSize(int size);
+
     private native void nativeSetReuseAddress(boolean reuse);
+
     private native void nativeSetSoTimeout(int timeout);
 
     private final int default_backlog = 1;
@@ -39,7 +49,7 @@ public class ServerSocket {
         nativeBind(inetSocketAddress, default_backlog);
     }
 
-    public ServerSocket(int port, int backlog) throws IOException{
+    public ServerSocket(int port, int backlog) throws IOException {
         Enumeration<BaseNetworkInterface> i = BaseNetworkInterface.getNetworkInterfaces();
         if (!i.hasMoreElements()) {
             throw new IOException("no NetworkInterfaces present");
@@ -64,11 +74,11 @@ public class ServerSocket {
     }
 
     public void bind(SocketAddress endpoint) throws IOException {
-        nativeBind((InetSocketAddress)endpoint, default_backlog);
+        nativeBind((InetSocketAddress) endpoint, default_backlog);
     }
 
     public void bind(SocketAddress endpoint, int backlog) throws IOException {
-        nativeBind((InetSocketAddress)endpoint, backlog);
+        nativeBind((InetSocketAddress) endpoint, backlog);
     }
 
     public void close() {

@@ -87,7 +87,7 @@ public class InetSocketAddress extends SocketAddress {
         if (!(obj instanceof InetSocketAddress)) {
             return false;
         }
-        InetSocketAddress i = (InetSocketAddress)obj;
+        InetSocketAddress i = (InetSocketAddress) obj;
         if (!this.getAddress().equals(i.getAddress())) {
             return false;
         }

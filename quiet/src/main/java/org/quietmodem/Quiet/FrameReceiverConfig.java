@@ -2,9 +2,7 @@ package org.quietmodem.Quiet;
 
 import android.content.Context;
 import android.media.AudioDeviceInfo;
-import android.media.AudioFormat;
 import android.media.AudioManager;
-import android.media.AudioRecord;
 import android.os.Build;
 import android.util.Log;
 
@@ -13,6 +11,7 @@ import java.io.InputStream;
 
 public class FrameReceiverConfig {
     private native long nativeOpen(String profiles, String key);
+
     private native void nativeFree();
 
     private final long defaultNumBuffers = 3;
@@ -52,7 +51,9 @@ public class FrameReceiverConfig {
         this.bufferLength = bufferLength;
     }
 
-    public void setSampleRate(int sampleRate) { this.sampleRate = sampleRate; }
+    public void setSampleRate(int sampleRate) {
+        this.sampleRate = sampleRate;
+    }
 
     public long getNumBuffers() {
         return numBuffers;
@@ -62,7 +63,9 @@ public class FrameReceiverConfig {
         return bufferLength;
     }
 
-    public int getSampleRate() { return sampleRate; }
+    public int getSampleRate() {
+        return sampleRate;
+    }
 
     public static String getDefaultProfiles(android.content.Context c) throws IOException {
         InputStream s = c.getResources().openRawResource(R.raw.quiet_profiles);

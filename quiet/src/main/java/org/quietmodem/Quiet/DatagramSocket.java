@@ -6,26 +6,46 @@ import java.net.SocketException;
 
 public class DatagramSocket {
     private native int nativeCreate() throws SocketException;
+
     private native void nativeBind(InetSocketAddress inetSocketAddress) throws SocketException;
+
     private native void nativeClose();
+
     private native void nativeConnect(InetSocketAddress inetSocketAddress) throws SocketException;
+
     private native void nativeDisconnect();
+
     private native int nativeReceive(DatagramPacket datagramPacket) throws IOException;
+
     private native int nativeSend(DatagramPacket datagramPacket) throws IOException;
+
     private native boolean nativeGetBroadcast() throws SocketException;
+
     private native int nativeGetReceiveBufferSize() throws SocketException;
+
     private native boolean nativeGetReuseAddress() throws SocketException;
+
     private native int nativeGetSendBufferSize() throws SocketException;
+
     private native int nativeGetSoTimeout() throws SocketException;
+
     private native int nativeGetTrafficClass() throws SocketException;
+
     private native void nativeSetBroadcast(boolean broadcast) throws SocketException;
+
     private native void nativeSetReceiveBufferSize(int size) throws SocketException;
+
     private native void nativeSetReuseAddress(boolean reuse) throws SocketException;
+
     private native void nativeSetSendBufferSize(int size) throws SocketException;
+
     private native void nativeSetSoTimeout(int timeout) throws SocketException;
+
     private native void nativeSetTrafficClass(int tos) throws SocketException;
+
     private native InetSocketAddress nativeGetLocal() throws IOException;
-    private native InetSocketAddress nativeGetRemote() throws  IOException;
+
+    private native InetSocketAddress nativeGetRemote() throws IOException;
 
 
     private int fd;

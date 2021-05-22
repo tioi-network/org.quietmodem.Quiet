@@ -1,23 +1,25 @@
 package org.quietmodem.Quiet;
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.SmallTest;
-
-import static org.junit.Assert.*;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.SmallTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class AudioFrameTest {
+
     @Test
-    public void testTransmitAndReceive() {
+    public void testTransmitAndReceive() throws IOException {
         FrameReceiverConfig receiverConfig = null;
         FrameTransmitterConfig transmitterConfig = null;
 
@@ -27,10 +29,10 @@ public class AudioFrameTest {
              * with `this`
              */
             transmitterConfig = new FrameTransmitterConfig(
-                    InstrumentationRegistry.getTargetContext(),
+                    InstrumentationRegistry.getInstrumentation().getTargetContext(),
                     "audible-7k-channel-0");
             receiverConfig = new FrameReceiverConfig(
-                    InstrumentationRegistry.getTargetContext(),
+                    InstrumentationRegistry.getInstrumentation().getTargetContext(),
                     "audible-7k-channel-0");
         } catch (IOException e) {
             fail("could not build configs");
@@ -55,19 +57,11 @@ public class AudioFrameTest {
         receiver.setBlocking(1, 0);
         byte[] buf = new byte[80];
         long recvLen = 0;
-        try {
-            recvLen = receiver.receive(buf);
-        } catch (IOException e) {
-            fail("error receiving from receiver");
-        }
+        recvLen = receiver.receive(buf);
 
         byte[] recvBuf = Arrays.copyOfRange(buf, 0, (int) recvLen);
-        String recvStr = "";
-        try {
-            recvStr = new String(recvBuf, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            fail("could not decode received buffer to utf-8");
-        }
+        String recvStr;
+        recvStr = new String(recvBuf, StandardCharsets.UTF_8);
         assertEquals(recvStr, payload);
 
         transmitter.close();

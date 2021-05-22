@@ -14,10 +14,21 @@ public class FrameStats {
         this.isFrameValid = isFrameValid;
     }
 
-    public Complex[] getSymbols() { return this.symbols; }
-    public float getReceivedSignalStrengthIndicator() { return this.receivedSignalStrengthIndicator; }
-    public float getErrorVectorMagnitude() { return this.errorVectorMagnitude; }
-    public boolean getIsFrameValid() { return this.isFrameValid; }
+    public Complex[] getSymbols() {
+        return this.symbols;
+    }
+
+    public float getReceivedSignalStrengthIndicator() {
+        return this.receivedSignalStrengthIndicator;
+    }
+
+    public float getErrorVectorMagnitude() {
+        return this.errorVectorMagnitude;
+    }
+
+    public boolean getIsFrameValid() {
+        return this.isFrameValid;
+    }
 
     static {
         QuietInit.init();

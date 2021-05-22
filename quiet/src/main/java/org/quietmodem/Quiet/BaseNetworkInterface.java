@@ -5,11 +5,15 @@ import java.util.Vector;
 
 public abstract class BaseNetworkInterface {
     protected abstract void initSystem() throws ModemException;
+
     protected abstract boolean isLoopback();
 
     private native long nativeOpen(long sys_ptr, NetworkInterfaceConfig conf, boolean is_loopback) throws ModemException;
+
     private native void nativeClose();
+
     private native void nativeTerminate(int urgency);
+
     private native void nativeFree();
 
     protected QuietSystem quietSystem;

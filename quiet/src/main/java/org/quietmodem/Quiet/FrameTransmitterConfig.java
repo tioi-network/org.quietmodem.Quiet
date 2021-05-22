@@ -9,6 +9,7 @@ import java.io.InputStream;
 
 public class FrameTransmitterConfig {
     private native long nativeOpen(String profiles, String key);
+
     private native void nativeFree();
 
     private final long defaultNumBuffers = 3;
@@ -19,6 +20,7 @@ public class FrameTransmitterConfig {
     long numBuffers;
     long bufferLength;
     int sampleRate;
+
     public FrameTransmitterConfig(android.content.Context c, String key) throws IOException {
         profile_ptr = nativeOpen(getDefaultProfiles(c), key);
         numBuffers = defaultNumBuffers;
@@ -55,7 +57,9 @@ public class FrameTransmitterConfig {
         this.bufferLength = bufferLength;
     }
 
-    public void setSampleRate(int sampleRate) { this.sampleRate = sampleRate; }
+    public void setSampleRate(int sampleRate) {
+        this.sampleRate = sampleRate;
+    }
 
     public long getNumBuffers() {
         return numBuffers;
@@ -65,7 +69,9 @@ public class FrameTransmitterConfig {
         return bufferLength;
     }
 
-    public int getSampleRate() { return sampleRate; }
+    public int getSampleRate() {
+        return sampleRate;
+    }
 
     @Override
     protected void finalize() throws Throwable {
