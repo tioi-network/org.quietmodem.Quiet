@@ -8,6 +8,9 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FrameReceiverConfig {
     private native long nativeOpen(String profiles, String key);
@@ -81,7 +84,11 @@ public class FrameReceiverConfig {
             String pRate = m.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
             int sampleRate = Integer.parseInt(pRate);
             Log.w("FrameReceiverConfig", pRate);
-            AudioDeviceInfo[] devices = m.getDevices(AudioManager.GET_DEVICES_ALL);
+
+            List<AudioDeviceInfo> audioDeviceInfos =  new ArrayList<>(Arrays.asList(m.getDevices(AudioManager.GET_DEVICES_INPUTS)));
+            audioDeviceInfos.addAll(Arrays.asList(m.getDevices(AudioManager.GET_DEVICES_INPUTS)));
+            AudioDeviceInfo[] devices = (AudioDeviceInfo[]) audioDeviceInfos.toArray();
+
             for (int i = 0; i < devices.length; i++) {
                 Log.w("FrameReceiverConfig", String.format("%s %d %d", devices[i].getProductName().toString(), devices[i].getId(), devices[i].getType()));
                 int[] rates = devices[i].getSampleRates();

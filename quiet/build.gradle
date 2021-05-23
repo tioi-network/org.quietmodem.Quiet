@@ -5,6 +5,8 @@ plugins {
     id "maven-publish"
 }
 
+group = "com.github.tioi-network"
+
 android {
     compileSdkVersion 30
     buildToolsVersion "26.0.3"
@@ -37,7 +39,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
 
     androidTestImplementation 'androidx.annotation:annotation:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.3.0'
@@ -82,3 +84,45 @@ task ndkLibsToJar(type: Zip, dependsOn: 'ndkBuild', description: 'Create a JAR o
     from(new File(buildDir, 'libs')) { include '**/*.so' }
     into 'lib/'
 }
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId rootProject.ext.pomGroupID
+            artifactId project.name
+            version rootProject.ext.pomVersion
+
+            artifact(sourceJar)
+            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+
+            pom.withXml {
+                final dependenciesNode = asNode().appendNode('dependencies')
+                ext.addDependency = { Dependency dep, String scope ->
+                    if (dep.group == null || dep.version == null || dep.name == null || dep.name == "unspecified")
+                        return // invalid dependencies should be ignored
+
+                    final dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('artifactId', dep.name)
+                    if (dep.version == 'unspecified') {
+                        dependencyNode.appendNode('groupId', rootProject.ext.pomGroupID)
+                        dependencyNode.appendNode('version', rootProject.ext.pomVersion)
+                    } else {
+                        dependencyNode.appendNode('groupId', dep.group)
+                        dependencyNode.appendNode('version', dep.version)
+                    }
+
+                    configurations.api.getDependencies().each { apiDep -> addDependency(apiDep, "compile") }
+                    configurations.implementation.getDependencies().each { impDep -> addDependency(impDep, "runtime") }
+
+                    dependencyNode.appendNode('scope', scope)
+                }
+            }
+        }
+    }
+}
+

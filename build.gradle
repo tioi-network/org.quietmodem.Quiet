@@ -1,10 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    repositories {
-        jcenter()
-        google()
+    ext {
+        pomVersion = 'develop-SNAPSHOT'
+        pomGroupID = "com.github.tioi-network"
     }
+
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+    }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.1'
 
@@ -15,8 +21,9 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+        mavenLocal()
         google()
+        mavenCentral()
     }
 }
 
